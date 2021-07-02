@@ -1,0 +1,206 @@
+.form-background {
+    display: flex;
+    background-color: #e5eaf0;
+    height: 100vh;
+    width: 100vw;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    display: flex;
+    border-radius: 0.7em;
+    flex-direction: column;
+    transition: all 1s;
+    height: 33em;
+    width: 30em;
+    overflow: hidden;
+    background-color: #ffffff;
+    align-items: center;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.signup-box {
+    height: 45em;
+}
+
+.sign-options-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    text-transform: uppercase;
+    margin: 1em 0 0 3em;
+    padding: 2em;
+    font-size: 1.2em;
+}
+
+.sign-option {
+    transition: 0.5s;
+    margin: 1em;
+    color: #8da0bc;
+    cursor: pointer;
+}
+
+.sign-option-active {
+    color: #1b4079;
+}
+
+.small-line {
+    background-color: #e5eaf0;
+    width: 5%;
+    height: 0.1em;
+}
+
+.password-forgot-header {
+    color: #1b4079;
+}
+
+.form {
+    width: 80%;
+}
+.form input {
+    width: 100%;
+    border-radius: 0.5em;
+    outline: none;
+    border: none;
+    background-color: #e5eaf0;
+    padding: 0.5em;
+    box-sizing: border-box;
+    padding-left: 0.6em;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.form input:focus {
+    background-color: #ebf0f7;
+}
+.form label {
+    display: inline-block;
+    margin: 0.5em 0 0.35em 0.4em;
+    color: #151e3f;
+}
+
+.checkbox-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.checkbox-container input[type='checkbox'] {
+    visibility: hidden;
+    background-color: #e5eaf0;
+    &:checked + label {
+        transform: rotate(360deg);
+        background-color: #000;
+        &:before {
+            transform: translateX(18px);
+            background-color: #fff;
+        }
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container button {
+    width: 35%;
+    border: none;
+    margin: 1.8em 1.4em 0 1.4em;
+    padding: 0.7em;
+    border-radius: 0.5em;
+    background-color: #e5eaf0;
+    color: #1b4079;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.6s;
+}
+
+.forgot-password-button {
+    padding: 1.6em !important;
+}
+
+.button-container button:hover {
+    background-color: #dadfe6;
+}
+
+.line {
+    background-color: #e5eaf0;
+    width: 65%;
+    height: 0.1em;
+    margin: 1.4em auto 0.7em auto;
+}
+
+.forgot-password {
+    text-align: right;
+    cursor: pointer;
+    font-size: 0.8em;
+    display: inline-block;
+    margin: 0.7em 0 0.35em 0.4em;
+    color: #1b4079;
+    transition: 0.3s;
+}
+.forgot-password:hover {
+    color: #8da0bc;
+}
+
+.login-with-text {
+    margin-top: 2.5em;
+    text-align: center;
+    font-size: 0.9em;
+}
+.login-providers-wrapper {
+    border-radius: 2px;
+    border: hotpink;
+}
+
+.login-providers {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1em;
+}
+.loginProvider {
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+
+.signup-input-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+.signup-input-enter-active {
+    opacity: 0.6;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+.signup-input-exit {
+    opacity: 1;
+}
+.signup-input-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.animate-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+.animate-enter-active {
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+.animate-exit {
+    opacity: 1;
+}
+.animate-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+}

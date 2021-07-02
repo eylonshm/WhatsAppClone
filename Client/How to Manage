@@ -1,0 +1,17 @@
+How to manage chats & messages: 
+
+1. When clicking on Chat - load chat messages.
+
+
+DB: 
+1. Users - id, name.
+2. Chats - id, participants, Messages: {
+    message sender: user Object
+    message content
+}
+! When redner chats: load only my chats:
+!! When render chat: 
+    if(message.sender.id === my.id) {
+        css: my message (green backround etc..)
+        else: other user message
+    }

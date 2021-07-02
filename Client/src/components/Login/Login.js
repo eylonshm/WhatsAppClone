@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import Btn from '@material-ui/core/Button'
 import { auth, provider } from '../../firebase'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
-import { Checkbox, Input } from '@material-ui/core'
+// import styled from 'styled-components'
+// import Btn from '@material-ui/core/Button'
+// import { Checkbox, Input } from '@material-ui/core'
 import './Login.scss'
 import { CSSTransition } from 'react-transition-group'
 import { FaFacebook, FaGoogle, FaTwitter, FaGithub } from 'react-icons/fa'
@@ -25,14 +25,15 @@ const Login = (props) => {
         setLastName('')
     }
 
-    const googleSignIn = () => {
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                props.onSetUser(null)
-            })
-            .catch((err) => {
-                console.log(err.message)
-            })
+    const googleSignIn = async () => {
+        try {
+            const data = await auth.signInWithPopup(provider)
+            props.onSetUser(data.user)
+        } catch (error) {
+            var errorCode = error.code
+            var errorMessage = error.message
+            console.log(errorMessage)
+        }
     }
     const passwordSignIn = async (event) => {
         event.preventDefault()
@@ -219,68 +220,68 @@ const mapDispathToProps = (dispatch) => {
 
 export default connect(null, mapDispathToProps)(Login)
 
-const LoginWrapper = styled.div`
-    background-color: #f8f8f8;
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    place-items: center;
-`
-const LoginBox = styled.div`
-    width: 25vw;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
-        0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
-`
-const WhatsAppImage = styled.img`
-    object-fit: contain;
-    height: 110px;
-    margin-top: 5vh;
-`
-const LoginOptions = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-const LoginForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 1vh;
-    position: relative;
-    align-items: center;
-    overflow: hidden;
-    transition: all 2s ease;
-`
-const InputField = styled.input`
-    padding: 5px;
-    margin: 5px;
-`
-const Button = styled(Btn)`
-    // color: white !importent;
-    // width: 200px;
-    // margin-top: 50px !important;
-    // text-transform: inherit !important;
-    // background-color: #0a8d48 !important;
-`
-const GoogleSign = styled(Btn)``
+// const LoginWrapper = styled.div`
+//     background-color: #f8f8f8;
+//     height: 100vh;
+//     width: 100vw;
+//     display: grid;
+//     place-items: center;
+// `
+// const LoginBox = styled.div`
+//     width: 25vw;
+//     height: 70vh;
+//     display: flex;
+//     flex-direction: column;
+//     text-align: center;
+//     background-color: white;
+//     border-radius: 10px;
+//     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+//         0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+// `
+// const WhatsAppImage = styled.img`
+//     object-fit: contain;
+//     height: 110px;
+//     margin-top: 5vh;
+// `
+// const LoginOptions = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// `
+// const LoginForm = styled.form`
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     margin-top: 1vh;
+//     position: relative;
+//     align-items: center;
+//     overflow: hidden;
+//     transition: all 2s ease;
+// `
+// const InputField = styled.input`
+//     padding: 5px;
+//     margin: 5px;
+// `
+// const Button = styled(Btn)`
+//     // color: white !importent;
+//     // width: 200px;
+//     // margin-top: 50px !important;
+//     // text-transform: inherit !important;
+//     // background-color: #0a8d48 !important;
+// `
+// const GoogleSign = styled(Btn)``
 
-const RememberMeWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-`
-const CreateNewAccount = styled.p`
-    font-size: 0.8rem;
-    background-color: blue;
-`
-const Link = styled.a``
-const Text = styled.p`
-    margin: 0px;
-`
+// const RememberMeWrapper = styled.div`
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+// `
+// const CreateNewAccount = styled.p`
+//     font-size: 0.8rem;
+//     background-color: blue;
+// `
+// const Link = styled.a``
+// const Text = styled.p`
+//     margin: 0px;
+// `

@@ -25,9 +25,9 @@ const Login = (props) => {
         setLastName('')
     }
 
-    const googleSignIn = async () => {
+    const providerSignIn = async (providerName) => {
         try {
-            const data = await auth.signInWithPopup(provider)
+            const data = await auth.signInWithPopup(provider[[providerName]])
             props.onSetUser(data.user)
         } catch (error) {
             var errorCode = error.code
@@ -97,8 +97,8 @@ const Login = (props) => {
                 </div>
                 <form className="form">
                     <CSSTransition appear={true} in={option === 'forgot'} timeout={{ enter: 500, exit: 0 }} classNames="signup-input" unmountOnExit>
-                        <div>
-                            <h4 className="password-forgot-header">FORGOT YOUR PASSWORD?</h4>
+                        <div className="password-forgot">
+                            <h4>FORGOT YOUR PASSWORD?</h4>
                             <p>Please enter your email or mobile number to reset your password.</p>
                         </div>
                     </CSSTransition>
@@ -199,10 +199,9 @@ const Login = (props) => {
                         <div className="login-providers-wrapper">
                             <p className="login-with-text">{`Or ${option === 'signIn' ? 'Login' : 'Sign Up'} With`}</p>
                             <div className="login-providers">
-                                <FaFacebook className="loginProvider" size="1.5em" color="#151e3f" />
-                                <FaGoogle className="loginProvider" size="1.5em" color="#151e3f" onClick={() => googleSignIn()} />
-                                <FaTwitter className="loginProvider" size="1.5em" color="#151e3f" />
-                                <FaGithub className="loginProvider" size="1.5em" color="#151e3f" />
+                                <FaFacebook className="loginProvider" size="1.5em" color="#151e3f" onClick={() => providerSignIn('facebook')} />
+                                <FaGoogle className="loginProvider" size="1.5em" color="#151e3f" onClick={() => providerSignIn('google')} />
+                                <FaGithub className="loginProvider" size="1.5em" color="#151e3f" onClick={() => providerSignIn('gitHub')} />
                             </div>
                         </div>
                     </div>

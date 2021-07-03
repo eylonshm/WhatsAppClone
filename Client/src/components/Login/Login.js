@@ -29,6 +29,7 @@ const Login = (props) => {
         try {
             const data = await auth.signInWithPopup(provider[[providerName]])
             props.onSetUser(data.user)
+            console.log(data.user)
         } catch (error) {
             var errorCode = error.code
             var errorMessage = error.message

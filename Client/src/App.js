@@ -7,26 +7,26 @@ import Login from './components/Login/Login'
 import { connect } from 'react-redux'
 
 function App(props) {
-    return (
-        //Add ! before props.user to allow Login Auth
-        <div className="app">
-            {!props.user ? (
-                <Login />
-            ) : (
-                <div className="app__body">
-                    <SideBar />
-                    {/* <Profile /> */}
-                    <Chat />
-                </div>
-            )}
+  return (
+    //Add ! before props.user to allow Login Auth
+    <div className='app'>
+      {!props.user ? (
+        <Login />
+      ) : (
+        <div className='app__body'>
+          {/* <SideBar /> */}
+          <Profile />
+          <Chat />
         </div>
-    )
+      )}
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.auth.user,
-    }
+  return {
+    user: state.auth.user,
+  }
 }
 
 export default connect(mapStateToProps)(App)

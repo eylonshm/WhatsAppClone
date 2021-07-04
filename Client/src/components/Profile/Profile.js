@@ -46,15 +46,15 @@ const Profile = (props) => {
   return (
     <ProfileWrapper>
       <ProfileHeader>
-        <ArrowBackIcon style={{ fontSize: 28 }} />
+        <ArrowBackIcon style={{ fontSize: 28 }} onClick={() => props.changeSideComponent('SideBar')} />
         <OptionNameHeader>Profile</OptionNameHeader>
       </ProfileHeader>
       <ProfileSection>
         <ImageWrapper>
           <FileInpurLabel for='upload-photo' />
           <FileInput type='file' name='photo' id='upload-photo' onChange={(event) => setNewUserImage(event.target.files[0])} />
-          <UserAvatar style={{ height: '180px', width: '180px' }} src={imageSrc} />
-          <ChangeProfilePictureWrapper>
+          <UserAvatar style={{ height: '180px', width: '180px' }} src={imageSrc || props.user.photoURL} />
+          <ChangeProfilePictureWrapper style={{ left: props.user?.photoURL ? '50px' : '60px' }}>
             <PhotoCameraIcon />
             <span style={{ display: 'block' }}>{`${props.user?.photoURL ? 'Change' : 'Add'} Profile`}</span>
             <span style={{ display: 'block' }}>picture</span>
@@ -156,7 +156,6 @@ const ChangeProfilePictureWrapper = styled.div`
   cursor: pointer;
   z-index: -1;
   top: 70px;
-  left: 60px;
   ${ImageWrapper}:hover & {
     z-index: 1;
   }

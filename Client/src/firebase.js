@@ -47,7 +47,6 @@ async function getFileURL(fileDirectory) {
   try {
     const ref = storage.ref().child(fileDirectory)
     const url = await ref.getDownloadURL()
-    console.log(url)
     return url
   } catch (err) {
     console.log(err)

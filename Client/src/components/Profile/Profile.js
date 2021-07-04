@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
@@ -7,12 +7,22 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Avatar from '@material-ui/core/Avatar'
 import Create from '@material-ui/icons/Create'
 import Done from '@material-ui/icons/Done'
+import { uploadFile, getFileURL, storageDirectory } from '../../firebase'
 
 const Profile = (props) => {
-  const [userAvatarHover, setUserAvatarHover] = useState(false)
   const [editingName, setEditingName] = useState(false)
   const [userName, setUserName] = useState(props.user?.displayName)
+  const [imageSrc, setImageSrc] = useState(null)
   const inputElement = useRef(null)
+
+  useEffect(() => {
+    fetchAndSetUserImageUrl()
+  }, [])
+
+  const fetchAndSetUserImageUrl = async () => {
+    const imageUrl = await getFileURL(`ProfileImages/${props.user.uid}`)
+    setImageSrc(imageUrl)
+  }
 
   const updateUserNameOnDb = async () => {
     try {
@@ -24,6 +34,15 @@ const Profile = (props) => {
       console.log(error)
     }
   }
+
+  const setNewUserImage = async (file) => {
+    await uploadFile(file, `ProfileImages/${props.user?.uid}`)
+    await props.user.updateProfile({
+      photoURL: `${storageDirectory}/${props.user?.uid}`,
+    })
+    await fetchAndSetUserImageUrl()
+  }
+
   return (
     <ProfileWrapper>
       <ProfileHeader>
@@ -32,18 +51,9 @@ const Profile = (props) => {
       </ProfileHeader>
       <ProfileSection>
         <ImageWrapper>
-          <UserAvatar
-            style={{ height: '180px', width: '180px' }}
-            src={props.user?.photoURL}
-            // onMouseEnter={() => {
-            //     setUserAvatarHover(true)
-            //     console.log(userAvatarHover)
-            // }}
-            // onmouseleave={() => {
-            //     setUserAvatarHover(false)
-            //     console.log(userAvatarHover)
-            // }}
-          ></UserAvatar>
+          <FileInpurLabel for='upload-photo' />
+          <FileInput type='file' name='photo' id='upload-photo' onChange={(event) => setNewUserImage(event.target.files[0])} />
+          <UserAvatar style={{ height: '180px', width: '180px' }} src={imageSrc} />
           <ChangeProfilePictureWrapper>
             <PhotoCameraIcon />
             <span style={{ display: 'block' }}>{`${props.user?.photoURL ? 'Change' : 'Add'} Profile`}</span>
@@ -206,4 +216,17 @@ const InputLine = styled.div`
   width: 93.5%;
   height: 0.1em;
   margin-left: 10px;
+`
+const FileInput = styled.input`
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+`
+const FileInpurLabel = styled.label`
+  cursor: pointer;
+  height: 180px;
+  width: 180px;
+  border-radius: 90px;
+  position: absolute;
+  z-index: 2;
 `

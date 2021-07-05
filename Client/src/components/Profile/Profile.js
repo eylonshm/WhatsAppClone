@@ -6,6 +6,8 @@ import ArrowBack from '@material-ui/icons/ArrowBack'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Avatar from '@material-ui/core/Avatar'
 import Create from '@material-ui/icons/Create'
+import Zoom from '@material-ui/core/Zoom'
+
 import Done from '@material-ui/icons/Done'
 import { uploadFile, getFileURL, storageDirectory } from '../../firebase'
 
@@ -50,16 +52,18 @@ const Profile = (props) => {
         <OptionNameHeader>Profile</OptionNameHeader>
       </ProfileHeader>
       <ProfileSection>
-        <ImageWrapper>
-          <FileInpurLabel for='upload-photo' />
-          <FileInput type='file' name='photo' id='upload-photo' onChange={(event) => setNewUserImage(event.target.files[0])} />
-          <UserAvatar style={{ height: '180px', width: '180px' }} src={imageSrc || props.user.photoURL} />
-          <ChangeProfilePictureWrapper style={{ left: props.user?.photoURL ? '50px' : '60px' }}>
-            <PhotoCameraIcon />
-            <span style={{ display: 'block' }}>{`${props.user?.photoURL ? 'Change' : 'Add'} Profile`}</span>
-            <span style={{ display: 'block' }}>picture</span>
-          </ChangeProfilePictureWrapper>
-        </ImageWrapper>
+        <Zoom in={imageSrc || props.user?.photoURL} style={{ transitionDelay: imageSrc || props.user?.photoURL ? '300ms' : '0ms' }}>
+          <ImageWrapper>
+            <FileInpurLabel for='upload-photo' />
+            <FileInput type='file' name='photo' id='upload-photo' onChange={(event) => setNewUserImage(event.target.files[0])} />
+            <UserAvatar style={{ height: '180px', width: '180px' }} src={imageSrc || props.user.photoURL} />
+            <ChangeProfilePictureWrapper style={{ left: props.user?.photoURL ? '50px' : '60px' }}>
+              <PhotoCameraIcon />
+              <span style={{ display: 'block' }}>{`${props.user?.photoURL ? 'Change' : 'Add'} Profile`}</span>
+              <span style={{ display: 'block' }}>picture</span>
+            </ChangeProfilePictureWrapper>
+          </ImageWrapper>
+        </Zoom>
         <ChangeNameWrapper>
           <h4>Your name</h4>
           {editingName ? (

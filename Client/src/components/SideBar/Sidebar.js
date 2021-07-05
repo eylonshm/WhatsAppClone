@@ -13,9 +13,10 @@ import MenuList from '@material-ui/core/MenuList'
 import MoreVert from '@material-ui/icons/MoreVert'
 import Search from '@material-ui/icons/Search'
 import ArrowBack from '@material-ui/icons/ArrowBack'
+import Zoom from '@material-ui/core/Zoom'
 import { connect } from 'react-redux'
 import SideBarChat from '../SidebarChat/SidebarChat'
-import { db, auth } from '../../firebase'
+import { db, auth, getFileURL } from '../../firebase'
 import * as actions from '../../store/actions/index'
 
 const Sidebar = (props) => {
@@ -24,6 +25,7 @@ const Sidebar = (props) => {
   const [searchIcon, setSearchIcon] = useState(true)
   const [optionsMenuIsOpen, setOptionsMenuIsOpen] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)
+  const [imageSrc, setImageSrc] = useState(null)
   useEffect(() => {
     async function fetchData() {
       console.log('SideBar RENDER')
@@ -44,6 +46,15 @@ const Sidebar = (props) => {
     }
     fetchData()
   }, [])
+
+  useEffect(() => {
+    fetchAndSetUserImageUrl()
+  }, [])
+
+  const fetchAndSetUserImageUrl = async () => {
+    const imageUrl = await getFileURL(`ProfileImages/${props.user.uid}`)
+    setImageSrc(imageUrl)
+  }
 
   const logout = async () => {
     try {
@@ -71,7 +82,9 @@ const Sidebar = (props) => {
   return props.user ? (
     <SideBarWrapper>
       <SideBarHeader>
-        <Avatar src={props.user?.photoURL} />
+        <Zoom in={imageSrc || props.user?.photoURL} style={{ transitionDelay: imageSrc || props.user?.photoURL ? '300ms' : '0ms' }}>
+          <Avatar src={imageSrc || props.user.photoURL} onClick={() => props.changeSideComponent('Profile')} style={{ cursor: 'pointer' }} />
+        </Zoom>
         <SideBarHeaderRight>
           <IconButton>
             <DonutLargeIcon />

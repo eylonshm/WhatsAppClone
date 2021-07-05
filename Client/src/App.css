@@ -1,15 +1,33 @@
 .app {
-    display: grid;
-    place-items: center;
-    background-color: #dadbd3;
-    height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: #dadbd3;
+  height: 100vh;
 }
 
 .app__body {
-    display: flex;
-    background-color: #ededed;
-    margin-top: -50px;
-    height: 90vh;
-    width: 90vw;
-    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+  display: flex;
+  background-color: #ededed;
+  margin-top: -50px;
+  height: 90vh;
+  width: 90vw;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.slide-enter-active {
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.slide-exit {
+  opacity: 1;
+}
+.slide-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }

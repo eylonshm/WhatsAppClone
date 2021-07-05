@@ -5,9 +5,19 @@ import Profile from './components/Profile/Profile'
 import Chat from './components/Chat/Chat'
 import Login from './components/Login/Login'
 import { connect } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
 
 function App(props) {
   const [currentSideComponent, setCurrentSideComponent] = useState('SideBar')
+
+  const SideBarComponent = (sideComponentName) => {
+    switch (sideComponentName) {
+      case 'Profile':
+        return <Profile changeSideComponent={(componentName) => setCurrentSideComponent(componentName)} />
+      default:
+        return <SideBar changeSideComponent={(componentName) => setCurrentSideComponent(componentName)} />
+    }
+  }
   return (
     //Add ! before props.user to allow Login Auth
     <div className='app'>
@@ -15,11 +25,7 @@ function App(props) {
         <Login />
       ) : (
         <div className='app__body'>
-          {currentSideComponent === 'SideBar' ? (
-            <SideBar changeSideComponent={(componentName) => setCurrentSideComponent(componentName)} />
-          ) : (
-            <Profile changeSideComponent={(componentName) => setCurrentSideComponent(componentName)} />
-          )}
+          {SideBarComponent(currentSideComponent)}
           <Chat />
         </div>
       )}

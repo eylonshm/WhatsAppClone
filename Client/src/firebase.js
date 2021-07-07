@@ -13,6 +13,7 @@ const firebaseConfig = {
 }
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
+
 const db = firebaseApp.firestore()
 const auth = firebase.auth()
 const provider = {
@@ -53,5 +54,5 @@ async function getFileURL(fileDirectory) {
   }
 }
 
-export { uploadFile, getFileURL, storageDirectory, auth, provider, db, firebaseApp }
+export { uploadFile, getFileURL, storageDirectory, auth, provider, db }
 // export default db

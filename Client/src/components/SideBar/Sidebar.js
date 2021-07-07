@@ -162,6 +162,7 @@ const SideBarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0.25;
+  flex-grow: 0.25;
 `
 const SideBarHeader = styled.div`
   display: flex;

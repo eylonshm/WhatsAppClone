@@ -68,6 +68,9 @@ const SideBarChatWrapper = styled.div`
   padding: 20px;
   cursor: pointer;
   border-bottom: 1px solid #f6f6f6;
+  max-width: 300px;
+  max-height: 55px;
+  overflow: hidden;
 
   &:hover {
     background-color: #ebebeb;
